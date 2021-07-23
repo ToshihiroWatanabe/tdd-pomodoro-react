@@ -43,7 +43,7 @@ const App = () => {
     isTimerOn: false,
   });
 
-  const onClick = () => {
+  const onButtonClick = () => {
     setState((state) => {
       clearInterval(countInterval);
       if (state.isTimerOn) {
@@ -72,25 +72,22 @@ const App = () => {
   };
 
   const toggleTimerMode = (state: State): State => {
-    if (state.timerMode === "work") {
-      return {
-        ...state,
-        timeLeft: TIMER_LENGTH.break,
-        timerMode: "break",
-      };
-    } else {
-      return {
-        ...state,
-        timeLeft: TIMER_LENGTH.work,
-        timerMode: "work",
-      };
-    }
+    const timeLeft =
+      state.timerMode === "work" ? TIMER_LENGTH.break : TIMER_LENGTH.work;
+    const timerMode = state.timerMode === "work" ? "break" : "work";
+    return {
+      ...state,
+      timeLeft: timeLeft,
+      timerMode: timerMode,
+    };
   };
 
   return (
     <>
       <div>{secondToMMSS(state.timeLeft)}</div>
-      <button onClick={onClick}>{state.isTimerOn ? "停止" : "開始"}</button>
+      <button onClick={onButtonClick}>
+        {state.isTimerOn ? "停止" : "開始"}
+      </button>
       <div>{state.timerMode === "work" ? "作業" : "休憩"}</div>
     </>
   );
