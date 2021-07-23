@@ -1,7 +1,11 @@
 import React from "react";
 
 const App = () => {
-  return <></>;
+  return (
+    <>
+      <div data-testid="timeLeft">25:00</div>
+    </>
+  );
 };
 
 export default App;
