@@ -1,9 +1,10 @@
+import { exception } from "console";
 import React, { useState } from "react";
 
 /** 一度にカウントする秒数 */
-const ONCE_COUNT = 1;
+export const ONCE_COUNT = 1;
 /** カウントの間隔(ミリ秒) */
-const COUNT_INTERVAL = 1000;
+export const COUNT_INTERVAL = 1000;
 /** カウントのsetIntervalのID */
 let countInterval = 0;
 
@@ -84,11 +85,13 @@ const App = () => {
 
   return (
     <>
-      <div>{secondToMMSS(state.timeLeft)}</div>
-      <button onClick={onButtonClick}>
+      <div data-testid="timeLeft">{secondToMMSS(state.timeLeft)}</div>
+      <button onClick={onButtonClick} data-testid="timerButton">
         {state.isTimerOn ? "停止" : "開始"}
       </button>
-      <div>{state.timerMode === "work" ? "作業" : "休憩"}</div>
+      <div data-testid="timerMode">
+        {state.timerMode === "work" ? "作業" : "休憩"}
+      </div>
     </>
   );
 };
