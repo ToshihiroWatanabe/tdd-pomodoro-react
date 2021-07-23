@@ -1,4 +1,3 @@
-import { exception } from "console";
 import React, { useState } from "react";
 
 /** 一度にカウントする秒数 */
@@ -12,7 +11,7 @@ let countInterval = 0;
 type TimerMode = "work" | "break";
 
 /** タイマーの長さ */
-const TIMER_LENGTH = { work: 25 * 60, break: 5 * 60 } as const;
+export const TIMER_LENGTH = { work: 25 * 60, break: 5 * 60 } as const;
 type TIMER_LENGTH = typeof TIMER_LENGTH[keyof typeof TIMER_LENGTH];
 
 interface State {
