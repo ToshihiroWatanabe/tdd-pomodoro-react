@@ -31,6 +31,7 @@ const App = () => {
   return (
     <>
       <div data-testid="timeLeft">{secondToMMSS(state.timeLeft)}</div>
+      <button data-testid="timerButton">開始</button>
     </>
   );
 };
