@@ -56,8 +56,22 @@ const App = () => {
 
   const timerCount = () => {
     setState((state) => {
+      if (state.timeLeft <= 0) {
+        state = toggleTimerMode(state);
+      }
       return { ...state, timeLeft: state.timeLeft - 1 };
     });
+  };
+
+  const toggleTimerMode = (state: State): State => {
+    const timeLeft =
+      state.timerMode === "work" ? TIMER_LENGTH.break : TIMER_LENGTH.work;
+    const timerMode = state.timerMode === "work" ? "break" : "work";
+    return {
+      ...state,
+      timeLeft: timeLeft,
+      timerMode: timerMode,
+    };
   };
 
   return (
