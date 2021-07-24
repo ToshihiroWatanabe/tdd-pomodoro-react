@@ -35,10 +35,17 @@ const App = () => {
     isTimerOn: false,
     timerMode: "work",
   });
+
+  const onButtonClick = () => {
+    setState((state) => {
+      return { ...state, isTimerOn: !state.isTimerOn };
+    });
+  };
+
   return (
     <>
       <div data-testid="timeLeft">{secondToMMSS(state.timeLeft)}</div>
-      <button data-testid="timerButton">
+      <button data-testid="timerButton" onClick={onButtonClick}>
         {state.isTimerOn ? "停止" : "開始"}
       </button>
       <div data-testid="timerMode">
