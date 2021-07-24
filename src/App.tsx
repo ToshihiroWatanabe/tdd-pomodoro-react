@@ -38,7 +38,16 @@ const App = () => {
 
   const onButtonClick = () => {
     setState((state) => {
+      setInterval(() => {
+        timerCount();
+      }, 1000);
       return { ...state, isTimerOn: !state.isTimerOn };
+    });
+  };
+
+  const timerCount = () => {
+    setState((state) => {
+      return { ...state, timeLeft: state.timeLeft - 1 };
     });
   };
 
