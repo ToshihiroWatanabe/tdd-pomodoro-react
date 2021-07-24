@@ -47,6 +47,7 @@ const App = () => {
 
   const onButtonClick = () => {
     setState((state) => {
+      clearInterval(timerCountInterval);
       if (state.isTimerOn) {
         return {
           ...state,
