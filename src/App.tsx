@@ -6,6 +6,7 @@ type TIMER_LENGTH = typeof TIMER_LENGTH[keyof typeof TIMER_LENGTH];
 
 interface State {
   timeLeft: number;
+  isTimerOn: boolean;
 }
 
 /**
@@ -27,11 +28,14 @@ const secondToMMSS = (second: number) => {
 const App = () => {
   const [state, setState] = useState<State>({
     timeLeft: TIMER_LENGTH.work,
+    isTimerOn: false,
   });
   return (
     <>
       <div data-testid="timeLeft">{secondToMMSS(state.timeLeft)}</div>
-      <button data-testid="timerButton">開始</button>
+      <button data-testid="timerButton">
+        {state.isTimerOn ? "停止" : "開始"}
+      </button>
     </>
   );
 };
