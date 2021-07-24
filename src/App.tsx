@@ -36,6 +36,7 @@ const App = () => {
       <button data-testid="timerButton">
         {state.isTimerOn ? "停止" : "開始"}
       </button>
+      <div data-testid="timerMode">作業</div>
     </>
   );
 };
