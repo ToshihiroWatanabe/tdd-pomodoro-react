@@ -133,13 +133,49 @@ describe("開始ボタンを押した後の表示のテスト", () => {
 
 describe("停止ボタンを押した後の表示のテスト", () => {
   describe("開始ボタンを押してから2秒後に停止ボタンを押した後の表示のテスト", () => {
-    test.todo("「25:00」と描画されていること");
-    test.todo("「作業」と描画されていること");
+    test("「25:00」と描画されていること", async () => {
+      jest.useFakeTimers();
+      const { getByTestId } = render(<App />);
+      userEvent.click(getByTestId("timerButton"));
+      act(() => {
+        jest.advanceTimersByTime(2 * 1000);
+      });
+      userEvent.click(getByTestId("timerButton"));
+      expect(getByTestId("timeLeft").textContent).toEqual("25:00");
+    });
+    test("「作業」と描画されていること", async () => {
+      jest.useFakeTimers();
+      const { getByTestId } = render(<App />);
+      userEvent.click(getByTestId("timerButton"));
+      act(() => {
+        jest.advanceTimersByTime(2 * 1000);
+      });
+      userEvent.click(getByTestId("timerButton"));
+      expect(getByTestId("timerMode").textContent).toEqual("作業");
+    });
     test.todo("停止してから1秒後に「25:00」と描画されていること");
   });
   describe("開始ボタンを押してから25分+2秒後に停止ボタンを押した後の表示のテスト", () => {
-    test.todo("「25:00」と描画されていること");
-    test.todo("「作業」と描画されていること");
+    test("「25:00」と描画されていること", async () => {
+      jest.useFakeTimers();
+      const { getByTestId } = render(<App />);
+      userEvent.click(getByTestId("timerButton"));
+      act(() => {
+        jest.advanceTimersByTime((25 * 60 + 2) * 1000);
+      });
+      userEvent.click(getByTestId("timerButton"));
+      expect(getByTestId("timeLeft").textContent).toEqual("25:00");
+    });
+    test("「作業」と描画されていること", async () => {
+      jest.useFakeTimers();
+      const { getByTestId } = render(<App />);
+      userEvent.click(getByTestId("timerButton"));
+      act(() => {
+        jest.advanceTimersByTime((25 * 60 + 2) * 1000);
+      });
+      userEvent.click(getByTestId("timerButton"));
+      expect(getByTestId("timerMode").textContent).toEqual("作業");
+    });
     test.todo("停止してから1秒後に「25:00」と描画されていること");
   });
 });
