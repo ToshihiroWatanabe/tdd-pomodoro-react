@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 /** タイマーの長さ */
 const TIMER_LENGTH = { work: 25 * 60, break: 5 * 60 } as const;
@@ -12,6 +12,9 @@ interface State {
   isTimerOn: boolean;
   timerMode: TimerMode;
 }
+
+/** タイマーのカウントのsetIntervalのID */
+let timerCountInterval = 0;
 
 /**
  * 秒の数値をMM:SS形式の文字列に変換します。
@@ -36,9 +39,15 @@ const App = () => {
     timerMode: "work",
   });
 
+  useEffect(() => {
+    return () => {
+      clearInterval(timerCountInterval);
+    };
+  }, []);
+
   const onButtonClick = () => {
     setState((state) => {
-      setInterval(() => {
+      timerCountInterval = window.setInterval(() => {
         timerCount();
       }, 1000);
       return { ...state, isTimerOn: !state.isTimerOn };
