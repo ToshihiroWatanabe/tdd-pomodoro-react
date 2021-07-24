@@ -94,7 +94,7 @@ test("開始ボタンを押して作業時間(25分) + 休憩時間(5分) + 1秒
   expect(getByTestId("timerMode").textContent).toEqual("作業");
 });
 
-test("開始ボタンを押してから30分 + 1秒間は常にカウント表示の文字数が5であること", async () => {
+test("開始ボタンを押してから30分 + 1秒間はカウント表示の範囲が「25:00」～「00:00」であること", async () => {
   jest.useFakeTimers();
   const { getByTestId } = render(<App />);
   userEvent.click(getByTestId("timerButton"));
@@ -103,7 +103,9 @@ test("開始ボタンを押してから30分 + 1秒間は常にカウント表�
     act(() => {
       jest.advanceTimersByTime(1000);
     });
-    expect(getByTestId("timeLeft").textContent?.length).toEqual(5);
+    expect(getByTestId("timeLeft").textContent).toMatch(
+      /25:00|2[0-4]:[0-5][0-9]|[0-1][0-9]:[0-5][0-9]/
+    );
     elapsedTime += 1000;
   }
 });
